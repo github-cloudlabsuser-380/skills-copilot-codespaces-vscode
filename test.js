@@ -1,40 +1,36 @@
-const readline = require('readline');
+const calculator = {
+    currentValue: 0,
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+    add: function(number) {
+        this.currentValue += number;
+    },
 
-rl.question('Enter the first number: ', (number1) => {
-    rl.question('Enter the second number: ', (number2) => {
-        rl.question('Enter the operation (add, subtract, multiply, divide): ', (operation) => {
-            let result;
-            switch(operation) {
-                case 'add':
-                    result = parseFloat(number1) + parseFloat(number2);
-                    break;
-                case 'subtract':
-                    result = parseFloat(number1) - parseFloat(number2);
-                    break;
-                case 'multiply':
-                    result = parseFloat(number1) * parseFloat(number2);
-                    break;
-                case 'divide':
-                    if(number2 != '0') {
-                        result = parseFloat(number1) / parseFloat(number2);
-                    } else {
-                        console.log('Error: Division by zero is not allowed.');
-                        rl.close();
-                        return;
-                    }
-                    break;
-                default:
-                    console.log('Error: Invalid operation. Please enter add, subtract, multiply, or divide.');
-                    rl.close();
-                    return;
-            }
-            console.log(`The result is: ${result}`);
-            rl.close();
-        });
-    });
-});
+    subtract: function(number) {
+        this.currentValue -= number;
+    },
+
+    multiply: function(number) {
+        this.currentValue *= number;
+    },
+
+    divide: function(number) {
+        if (number !== 0) {
+            this.currentValue /= number;
+        } else {
+            throw new Error('Error: Division by zero is not allowed.');
+        }
+    }
+};
+
+// Usage:
+calculator.add(5); // Adds 5 to the current value
+console.log(calculator.currentValue); // Outputs: 5
+
+calculator.subtract(3); // Subtracts 3 from the current value
+console.log(calculator.currentValue); // Outputs: 2
+
+calculator.multiply(4); // Multiplies the current value by 4
+console.log(calculator.currentValue); // Outputs: 8
+
+calculator.divide(2); // Divides the current value by 2
+console.log(calculator.currentValue); // Outputs: 4
