@@ -1,67 +1,37 @@
-const readline = require('readline');
-
+// Define the calculator object
 const calculator = {
+    // Define the current value of the calculator
     currentValue: 0,
 
-    add: function(number) {
-        this.currentValue += number;
+    // Add a number to the current value
+    add: function(num) {
+        this.currentValue += num;
     },
 
-    subtract: function(number) {
-        this.currentValue -= number;
+    // Subtract a number from the current value
+    subtract: function(num) {
+        this.currentValue -= num;
     },
 
-    multiply: function(number) {
-        this.currentValue *= number;
+    // Multiply the current value by a number
+    multiply: function(num) {
+        this.currentValue *= num;
     },
 
-    divide: function(number) {
-        if (number !== 0) {
-            this.currentValue /= number;
-        } else {
-            throw new Error('Error: Division by zero is not allowed.');
-        }
+    // Divide the current value by a number
+    divide: function(num) {
+        this.currentValue /= num;
     }
 };
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Enter operation (add, subtract, multiply, divide): ', (operation) => {
-    rl.question('Enter first number: ', (firstNumber) => {
-        rl.question('Enter second number: ', (secondNumber) => {
-            firstNumber = parseFloat(firstNumber);
-            secondNumber = parseFloat(secondNumber);
-
-            switch (operation) {
-                case 'add':
-                    calculator.add(firstNumber);
-                    calculator.add(secondNumber);
-                    break;
-                case 'subtract':
-                    calculator.add(firstNumber);
-                    calculator.subtract(secondNumber);
-                    break;
-                case 'multiply':
-                    calculator.currentValue = 1; // Reset to 1 for multiplication
-                    calculator.multiply(firstNumber);
-                    calculator.multiply(secondNumber);
-                    break;
-                case 'divide':
-                    calculator.currentValue = firstNumber;
-                    calculator.divide(secondNumber);
-                    break;
-                default:
-                    console.log('Invalid operation!');
-                    rl.close();
-                    return;
-            }
-
-            console.log('Result: ' + calculator.currentValue);
-            calculator.currentValue = 0; // Reset for next calculation
-            rl.close();
-        });
-    });
-});
+// Test the calculator
+calculator.add(5);
+console.log(calculator.currentValue); // 5
+calculator.subtract(2);
+console.log(calculator.currentValue); // 3
+calculator.multiply(3);
+console.log(calculator.currentValue); // 9
+calculator.divide(2);
+console.log(calculator.currentValue); // 4.5
+calculator.clear();
+console.log(calculator.currentValue); // 0
