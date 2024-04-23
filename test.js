@@ -29,19 +29,39 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-function askQuestion(query) {
-    return new Promise(resolve => rl.question(query, ans => resolve(ans)));
-}
+rl.question('Enter operation (add, subtract, multiply, divide): ', (operation) => {
+    rl.question('Enter first number: ', (firstNumber) => {
+        rl.question('Enter second number: ', (secondNumber) => {
+            firstNumber = parseFloat(firstNumber);
+            secondNumber = parseFloat(secondNumber);
 
-async function main() {
-    while (true) {
-        console.log(`Current value: ${calculator.currentValue}`);
-        let operation = await askQuestion('Enter operation (add, subtract, multiply, divide, exit): ');
-        if (operation === 'exit') break;
-        let number = parseFloat(await askQuestion('Enter number: '));
-        calculator[operation](number);
-    }
-    rl.close();
-}
+            switch (operation) {
+                case 'add':
+                    calculator.add(firstNumber);
+                    calculator.add(secondNumber);
+                    break;
+                case 'subtract':
+                    calculator.add(firstNumber);
+                    calculator.subtract(secondNumber);
+                    break;
+                case 'multiply':
+                    calculator.currentValue = 1; // Reset to 1 for multiplication
+                    calculator.multiply(firstNumber);
+                    calculator.multiply(secondNumber);
+                    break;
+                case 'divide':
+                    calculator.currentValue = firstNumber;
+                    calculator.divide(secondNumber);
+                    break;
+                default:
+                    console.log('Invalid operation!');
+                    rl.close();
+                    return;
+            }
 
-main();
+            console.log('Result: ' + calculator.currentValue);
+            calculator.currentValue = 0; // Reset for next calculation
+            rl.close();
+        });
+    });
+});
