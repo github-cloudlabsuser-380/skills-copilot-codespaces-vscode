@@ -29,9 +29,11 @@ calculator.add(5);
 console.log(calculator.currentValue); // 5
 calculator.subtract(2);
 console.log(calculator.currentValue); // 3
-calculator.multiply(3);
-console.log(calculator.currentValue); // 9
+calculator.multiply(-3);
+console.log(calculator.currentValue); // -9
 calculator.divide(2);
-console.log(calculator.currentValue); // 4.5
+console.log(calculator.currentValue); // -4.5
+calculator.add(-2);
+console.log(calculator.currentValue); // -6.5
 calculator.clear();
 console.log(calculator.currentValue); // 0
